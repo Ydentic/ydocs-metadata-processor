@@ -38,6 +38,7 @@ jobs:
           github-author-email: <insert author email>
           github-token: ${{ secrets.GITHUB_TOKEN }}
           documentation-directory: <instert documentation folder (optional)>
+          show-debug-log: false
 ```
 
 Replace the placeholders of the template:
@@ -46,6 +47,7 @@ Replace the placeholders of the template:
 - *Optional:* You can change the name as you please. This is not really important for the process but is required for the workflow creation.
 - *Optional:* You can edit the `branches` property to anything you'd like for as long as it matches branch names in your documentation repo. The workflow will not start otherwise.
 -  *Optional:* You can replace `<instert documentation folder (optional)>` with the name of a folder inside the documentation repository that contains the documentation. For instance `Customer Manuals`. **Remove the entire line from the file if you don't want to customize it.**
+-  *Optional:* You can replace `show-debug-log: false` with `show-debug-log: true` to enabled debug logging for the processor. 
 
 > Don't include the `<` and `>` around the placeholders.
 
