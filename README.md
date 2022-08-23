@@ -1,19 +1,22 @@
-# Ydentic documentation metadataprocessor
+# Ydentic documentation metadata processor
 
 ## Introduction
-This composite action is designed to process files so they can be used by Ydentic Ydocs.
-Includes processing of the metadata header for .md files such as create date, updated date and authors.
+This composite (GitHub) action can be used to add or update metadata for Ydocs source repositories. Metadata like the author, create date and update date are fetched from the Git data. It only updates the metadata of files that were changed.
 
 ## Setup
 
 ### Workflow
-This action can be triggered from any github repository private and public with github external workflows enabled.
+This action can be triggered from any private or public GitHub repository. GitHub external workflows needs to be enabled.
 
-In your documentation repository create a folder named `.github` under this folder create another folder named `workflows`.
-In this `workflows` folder create a filed named `workflow.yaml` (`workflow.yml` also works).
-Copy this action template into that file.
+Follow these steps to create the Github action:
+-	Go to https://github.com and open the documentation repository.
+-	Open to the `Actions` tab.
+-	Select `Simple workflow` -> `Configure`
+-	Change the name to something like `workflow.yml`.
+-	Copy the template below:
 
-```
+
+``` yaml
 name: 'Documentation metadata processing flow'
 
 on: 
@@ -29,23 +32,32 @@ jobs:
       contents: write
     steps:
       - name: Run build action
-        uses: ydentic/ydocs-metadata-processor@v1.0.0
+        uses: ydentic/ydocs-metadata-processor@v1.0.1
         with:
           github-author-name: <insert author name>
           github-author-email: <insert author email>
           github-token: ${{ secrets.GITHUB_TOKEN }}
           documentation-directory: <instert documentation folder (optional)>
 ```
-- **IMPORTANT**: Replace `<insert author name>` with the name of a service account in github or just something recognizable for instance. "Developer" or "Documentation bot"
-- **IMPORTANT**: Replace `<insert author email>` with the email of a service account in github or just something recognizable for instance. "developer@companyname.com" or "documentation-bot-@companyname.com"
 
-- (Optional) You can change the name as you please this is not really important for the process but is required for the workflow creation.
-- (Optional) You can edit the `branchs` property to anything you'd like for as long as it matches branch names in your documentation repo or the workflow wil not trigger.
+Replace the placeholders of the template:
+- **Mandatory:** Replace `<insert author name>` with the name of a service account in GitHub or just something recognizable for instance. "Developer" or "Documentation bot"
+- **Mandatory:** Replace `<insert author email>` with the email of a service account in GitHub or just something recognizable for instance. "developer@companyname.com" or "documentation-bot@companyname.com"
+- *Optional:* You can change the name as you please. This is not really important for the process but is required for the workflow creation.
+- *Optional:* You can edit the `branches` property to anything you'd like for as long as it matches branch names in your documentation repo. The workflow will not start otherwise.
+-  *Optional:* You can replace `<instert documentation folder (optional)>` with the name of a folder inside the documentation repository that contains the documentation. For instance `Customer Manuals`. **Remove the entire line from the file if you don't want to customize it.**
 
-- (Optional) You can replace `<instert documentation folder (optional)>` with the name of a folder inside the documentation repository that contains the documentation. For instance `Customer Manuals` otherwise remove the entire line from the file.
+> Don't include the `<` and `>` around the placeholders.
 
 ### Repository settings
-As repository admin. Go to settings. And then under actions enable `Allow all actions and resusable workflows` en druk op `Save`.
+
+Follow these steps to allow external actions:
+-	Go to https://github.com and open the documentation repository.
+-	Open to the `Settings` tab.
+- Open `Actions` -> `General`.
+- Click on the radiobutton of `Allow all actions and resusable workflows`.
+- Click on `Save`.
+
 ![img/documentation-repo-action-settings](img/documentation-repo-action-settings.png)
 
 ## Reference
@@ -57,6 +69,3 @@ As repository admin. Go to settings. And then under actions enable `Allow all ac
 
 Branch definition
 https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#using-filters
-
-
-
