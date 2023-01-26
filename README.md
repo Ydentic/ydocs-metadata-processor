@@ -32,7 +32,7 @@ jobs:
       contents: write
     steps:
       - name: Run build action
-        uses: ydentic/ydocs-metadata-processor@v1.0.8
+        uses: ydentic/ydocs-metadata-processor@v1.0.10
         with:
           github-author-name: <insert author name>
           github-author-email: <insert author email>
