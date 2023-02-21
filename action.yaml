@@ -34,7 +34,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: ydentic/ydocs-metadata-processor
-        ref: v1.0.10
+        ref: v1.0.11
         path: ./ydocs-metadata-processor
         token: ${{ inputs.github-token }} 
     - name: 'Add executable tag'
