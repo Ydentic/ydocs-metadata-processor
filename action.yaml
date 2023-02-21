@@ -34,14 +34,14 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: ydentic/ydocs-metadata-processor
-        ref: v1.0.11
+        ref: v1.0.12
         path: ./ydocs-metadata-processor
         token: ${{ inputs.github-token }} 
     - name: 'Add executable tag'
       run: chmod +x ./ydocs-metadata-processor/dist/YdocsMetadataProcessor.dll
       shell: bash
     - name: 'Run documentation builder'
-      run: 'dotnet ./ydocs-metadata-processor/dist/YdocsMetadataProcessor.dll --repository ${{ github.repository }} --branch ${{ github.ref_name }} --folder ./documentation/${{ inputs.documenation-directory }} --debug ${{ inputs.show-debug-log }}'
+      run: 'dotnet ./ydocs-metadata-processor/dist/YdocsMetadataProcessor.dll --repository ${{ github.repository }} --branch ${{ github.ref_name }} --folder ./documentation/${{ inputs.documentation-directory }} --debug ${{ inputs.show-debug-log }}'
       shell: bash
     - name: Git Add & Commit
       uses: EndBug/add-and-commit@v9.1.1
